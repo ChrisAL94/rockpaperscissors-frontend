@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'rockpaperscissors-frontend';
+  buttonClickCount = 0;
+  buttonClicked() {
+    this.buttonClickCount++;
+    alert(`Button was clicked ${this.buttonClickCount} times`)
+  }
 }
