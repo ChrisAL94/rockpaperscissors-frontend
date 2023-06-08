@@ -1,4 +1,11 @@
-<header>
-  <img class="logo" src="assets/logo.png">
-  <h1>Rock Paper Scissors!</h1>
-</header>
+<mat-toolbar class color="primary">
+  <img class="logo header" src="assets/logo.png">
+  <span class="header">Rock Paper Scissors</span>
+  <span class="example-spacer"></span>
+  <button (click)="openStats()" mat-icon-button aria-label="Button to get user statistics">
+    <mat-icon>assessment</mat-icon>
+  </button>
+  <button (click)="logout()" mat-icon-button aria-label="Button to logout">
+    <mat-icon>logout</mat-icon>
+  </button>
+</mat-toolbar>

@@ -1,12 +1,19 @@
-header {
-  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
-  background-color: white;
-  vertical-align: middle;
+.example-spacer {
+  flex: 1 1 auto;
 }
 
 .logo {
   height: 48px;
-  margin-top: 16px;
-  margin-bottom: 16px;
-  margin-left: 18px;
+}
+
+.header {
+  padding-top: 10px;
+  padding-left: 16px;
+  padding-bottom: 10px;
+  font-weight: bolder;
+  font-size: larger;
+}
+
+* {
+  background-color: antiquewhite;
 }
