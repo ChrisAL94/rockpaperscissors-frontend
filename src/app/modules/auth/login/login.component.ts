@@ -7,16 +7,16 @@ import {MatSelectModule} from '@angular/material/select';
 import { FormControl, FormsModule } from '@angular/forms';
 import {ThemePalette} from '@angular/material/core';
 import { NgForOf } from '@angular/common';
-
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
   standalone: true,
-  imports: [MatCardModule, MatDividerModule, MatButtonModule, MatFormFieldModule, MatSelectModule, FormsModule, NgForOf],
+  imports: [MatCardModule, MatDividerModule, MatButtonModule, MatFormFieldModule, MatSelectModule, FormsModule, NgForOf, RouterLink],
 })
 export class LoginComponent {
   themeColor = new FormControl('primary' as ThemePalette);
-  usersList: Array<String> = ['User_1', 'User_2', 'User_3']
+  usersList: Array<String> = ['User_1', 'User_2', 'User_3'];
 }
