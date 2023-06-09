@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
+import { HeaderComponent } from './core/header/header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FooterComponent } from './footer/footer.component';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
+import { FooterComponent } from './core/footer/footer.component';
+import { LoginComponent } from './modules/auth/login/login.component';
+import { RegisterComponent } from './modules/auth/register/register.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
@@ -32,6 +33,11 @@ import { MatSelectModule } from '@angular/material/select';
     MatFormFieldModule,
     MatOptionModule,
     MatSelectModule,
+    RouterModule.forRoot([
+      { path: '', component: LoginComponent},
+      { path: 'login', component: LoginComponent},
+      { path: 'register', component: RegisterComponent}]),
+      // { path: '**', component: NotFoundComponent}]),
   ],
   providers: [],
   bootstrap: [AppComponent]
