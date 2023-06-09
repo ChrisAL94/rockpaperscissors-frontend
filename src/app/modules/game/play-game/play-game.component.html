@@ -1,4 +1,4 @@
-<div class="gamebox">
+<div class="gamebox" *ngIf="playGame">
   <div>
     <h2>Play Rock Paper Scissors!</h2>
   </div>
@@ -20,13 +20,22 @@
   </div>
   <div style="margin-top: 20px">
     <mat-card-actions>
-      <button mat-raised-button [routerLink]="['/register']">Play</button>
+      <button mat-raised-button (click)="playGame = false">Play</button>
     </mat-card-actions>
   </div>
   <mat-divider style="margin-top: 40px"></mat-divider>
   <div class="rulebox">
     <h4 style="color: gray">Rules:</h4>
     <p style="color: gray">Rocks beats Scissors<br>Scissors beats Paper<br>Paper beats Rock</p>
+  </div>
+</div>
+<div class="gamebox">
+  <div *ngIf="!playGame">
+    <h2>{{gameResult}}</h2>
+    <h4>Computer chose {{computerChoice}}</h4>
+    <mat-card-actions>
+      <button mat-raised-button (click)="playGame = true">Play Again</button>
+    </mat-card-actions>
   </div>
 </div>
 
