@@ -17,7 +17,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { NotFoundComponent } from './core/not-found/not-found.component';
 import { PlayGameComponent } from './modules/game/play-game/play-game.component';
 import { MatIconModule } from '@angular/material/icon';
-import { UserStatisticsComponent } from './user-statistics/user-statistics.component';
+import { UserStatisticsComponent } from './modules/statistics/user-statistics/user-statistics.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 
 @NgModule({
@@ -45,8 +47,11 @@ import { UserStatisticsComponent } from './user-statistics/user-statistics.compo
       { path: 'login', component: LoginComponent },
       { path: 'register', component: RegisterComponent },
       { path: 'game', component: PlayGameComponent },
+      { path: 'statistics/:username', component: UserStatisticsComponent },
       { path: '**', component: NotFoundComponent }]),
     MatIconModule,
+    MatTableModule,
+    MatToolbarModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,18 @@
+div {
+  margin-top: 5%;
+  margin-left: 30%;
+  margin-right: 30%;
+  width: 40%;
+}
+
+.example-icon {
+  padding: 0 14px;
+}
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+span {
+  font-size: larger;
+  font-weight: bold;
+}

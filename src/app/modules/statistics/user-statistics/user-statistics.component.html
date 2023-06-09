@@ -1,0 +1,54 @@
+<div>
+  <h2>{{player.userName}}</h2>
+  <h3>Your Statistics:</h3>
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <span>Wins: {{player.wins}}</span>
+      <span class="example-spacer"></span>
+      <mat-icon class="example-icon" aria-hidden="false" aria-label="Example heart icon">emoji_events</mat-icon>
+    </mat-toolbar-row>
+
+    <mat-toolbar-row>
+      <span>Defeats: {{player.defeats}}</span>
+      <span class="example-spacer"></span>
+      <mat-icon class="example-icon" aria-hidden="false" aria-label="Example user verified icon">arrow_downward
+      </mat-icon>
+    </mat-toolbar-row>
+
+    <mat-toolbar-row>
+      <span>Ties: {{player.tie}}</span>
+      <span class="example-spacer"></span>
+      <mat-icon class="example-icon" aria-hidden="false" aria-label="Example delete icon">handshake</mat-icon>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+  <h3>Best Players:</h3>
+  <table mat-table [dataSource]="playerTable" class="mat-elevation-z8">
+    <ng-container matColumnDef="username">
+      <th mat-header-cell *matHeaderCellDef> Username</th>
+      <td mat-cell *matCellDef="let player"> {{player.userName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="wins">
+      <th mat-header-cell *matHeaderCellDef> Wins</th>
+      <td mat-cell *matCellDef="let player"> {{player.wins}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="defeats">
+      <th mat-header-cell *matHeaderCellDef> Defeats</th>
+      <td mat-cell *matCellDef="let player"> {{player.defeats}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="ties">
+      <th mat-header-cell *matHeaderCellDef> Ties</th>
+      <td mat-cell *matCellDef="let player"> {{player.tie}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-card-actions>
+    <button style="margin-top: 5%" mat-raised-button [routerLink]="['/game']">Back to Game</button>
+  </mat-card-actions>
+</div>
