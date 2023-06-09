@@ -15,12 +15,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { NotFoundComponent } from './core/not-found/not-found.component';
+import { PlayGameComponent } from './modules/game/play-game/play-game.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     NotFoundComponent,
+    PlayGameComponent,
   ],
   imports: [
     BrowserModule,
