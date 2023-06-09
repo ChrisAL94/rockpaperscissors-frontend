@@ -1,5 +1,5 @@
 <div class="centered-div">
-  <mat-card class="example-card">
+  <mat-card class="register-card">
     <mat-card-header>
       <mat-card-title>Register</mat-card-title>
     </mat-card-header>
@@ -7,10 +7,10 @@
       <p>Please choose a unique username.</p>
       <p>
         <mat-form-field appearance="outline">
-          <mat-label>Outline form field</mat-label>
-          <input matInput placeholder="Username">
+          <mat-label>Username</mat-label>
+          <input matInput placeholder="Username" [formControl]="username" required>
+          <mat-error *ngIf="username.invalid">{{getErrorMessage()}}</mat-error>
           <mat-icon matSuffix>person</mat-icon>
-          <mat-hint *ngIf="showHint" class="hint">Hint</mat-hint>
         </mat-form-field>
       </p>
       <mat-divider></mat-divider>
