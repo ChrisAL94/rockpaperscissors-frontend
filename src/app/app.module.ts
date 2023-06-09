@@ -14,11 +14,13 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
+import { NotFoundComponent } from './core/not-found/not-found.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,8 +38,8 @@ import { MatSelectModule } from '@angular/material/select';
     RouterModule.forRoot([
       { path: '', component: LoginComponent},
       { path: 'login', component: LoginComponent},
-      { path: 'register', component: RegisterComponent}]),
-      // { path: '**', component: NotFoundComponent}]),
+      { path: 'register', component: RegisterComponent},
+      { path: '**', component: NotFoundComponent}]),
   ],
   providers: [],
   bootstrap: [AppComponent]
