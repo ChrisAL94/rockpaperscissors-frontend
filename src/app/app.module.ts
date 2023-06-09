@@ -17,12 +17,14 @@ import { MatSelectModule } from '@angular/material/select';
 import { NotFoundComponent } from './core/not-found/not-found.component';
 import { PlayGameComponent } from './modules/game/play-game/play-game.component';
 import { MatIconModule } from '@angular/material/icon';
+import { UserStatisticsComponent } from './user-statistics/user-statistics.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     NotFoundComponent,
+    UserStatisticsComponent,
   ],
   imports: [
     BrowserModule,
