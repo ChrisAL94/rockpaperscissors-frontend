@@ -16,16 +16,17 @@ import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { NotFoundComponent } from './core/not-found/not-found.component';
 import { PlayGameComponent } from './modules/game/play-game/play-game.component';
+import { MatIconModule } from '@angular/material/icon';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     NotFoundComponent,
-    PlayGameComponent,
   ],
   imports: [
     BrowserModule,
+    PlayGameComponent,
     BrowserAnimationsModule,
     HeaderComponent,
     FooterComponent,
@@ -38,10 +39,12 @@ import { PlayGameComponent } from './modules/game/play-game/play-game.component'
     MatOptionModule,
     MatSelectModule,
     RouterModule.forRoot([
-      { path: '', component: LoginComponent},
-      { path: 'login', component: LoginComponent},
-      { path: 'register', component: RegisterComponent},
-      { path: '**', component: NotFoundComponent}]),
+      { path: '', component: LoginComponent },
+      { path: 'login', component: LoginComponent },
+      { path: 'register', component: RegisterComponent },
+      { path: 'game', component: PlayGameComponent },
+      { path: '**', component: NotFoundComponent }]),
+    MatIconModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

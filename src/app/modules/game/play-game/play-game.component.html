@@ -1,1 +1,32 @@
-<p>play-game works!</p>
+<div class="gamebox">
+  <div>
+    <h2>Play Rock Paper Scissors!</h2>
+  </div>
+  <div>
+    <h5>Choose one of the symbols to play</h5>
+  </div>
+  <div>
+    <mat-button-toggle-group name="symbolSelector" aria-label="Symbol Selector">
+      <mat-button-toggle mat-icon-button aria-label="Button to get user statistics">
+        <mat-icon>filter_hdr</mat-icon>
+      </mat-button-toggle>
+      <mat-button-toggle mat-icon-button aria-label="Button to logout">
+        <mat-icon>note</mat-icon>
+      </mat-button-toggle>
+      <mat-button-toggle mat-icon-button aria-label="Button to logout">
+        <mat-icon>content_cut</mat-icon>
+      </mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+  <div style="margin-top: 20px">
+    <mat-card-actions>
+      <button mat-raised-button [routerLink]="['/register']">Play</button>
+    </mat-card-actions>
+  </div>
+  <mat-divider style="margin-top: 40px"></mat-divider>
+  <div class="rulebox">
+    <h4 style="color: gray">Rules:</h4>
+    <p style="color: gray">Rocks beats Scissors<br>Scissors beats Paper<br>Paper beats Rock</p>
+  </div>
+</div>
+
