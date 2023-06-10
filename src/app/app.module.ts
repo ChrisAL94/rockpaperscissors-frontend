@@ -42,6 +42,9 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatFormFieldModule,
     MatOptionModule,
     MatSelectModule,
+    MatIconModule,
+    MatTableModule,
+    MatToolbarModule,
     RouterModule.forRoot([
       { path: '', component: LoginComponent },
       { path: 'login', component: LoginComponent },
@@ -49,9 +52,6 @@ import { MatToolbarModule } from '@angular/material/toolbar';
       { path: 'game', component: PlayGameComponent },
       { path: 'statistics/:username', component: UserStatisticsComponent },
       { path: '**', component: NotFoundComponent }]),
-    MatIconModule,
-    MatTableModule,
-    MatToolbarModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
