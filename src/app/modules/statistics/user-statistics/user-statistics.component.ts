@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-user-statistics',
@@ -7,7 +8,12 @@ import { Component } from '@angular/core';
 })
 export class UserStatisticsComponent {
   displayedColumns: string[] = ['username', 'wins', 'defeats', 'ties'];
-  player = { userName: "testUser1", wins: 5, defeats: 4, tie: 0 };
-  playerTable = [
-    {userName: "testUser1", wins: 5, defeats: 4, tie: 0}, {userName: "testUser2", wins: 6, defeats: 2, tie: 3}, {userName: "testUser3", wins: 7, defeats: 3, tie: 1}]
+  playerHistory;
+  playerTable;
+
+  constructor(userService: UserService) {
+    this.playerHistory = userService.getUserGameHistoryByUserName('user1');
+    this.playerTable = userService.getAllUsersGameHistory();
+  }
+
 }

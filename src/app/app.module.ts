@@ -20,6 +20,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { UserStatisticsComponent } from './modules/statistics/user-statistics/user-statistics.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { UserService } from './services/user.service';
 
 
 @NgModule({
@@ -53,7 +54,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
       { path: 'statistics/:username', component: UserStatisticsComponent },
       { path: '**', component: NotFoundComponent }]),
   ],
-  providers: [],
+  providers: [UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
