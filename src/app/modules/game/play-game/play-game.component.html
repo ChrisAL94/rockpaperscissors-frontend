@@ -1,4 +1,4 @@
-<div class="gamebox" *ngIf="playGame">
+<div class="gamebox" *ngIf="playGame && !gameService.loading">
   <div>
     <h2>Play Rock Paper Scissors!</h2>
   </div>
@@ -20,7 +20,7 @@
   </div>
   <div style="margin-top: 20px">
     <button mat-raised-button [disabled]="playerChoice == undefined"
-            (click)="playGame = false">Play
+            (click)="play()">Play
     </button>
   </div>
   <mat-divider style="margin-top: 40px"></mat-divider>
@@ -30,7 +30,7 @@
   </div>
 </div>
 <div class="gamebox">
-  <div *ngIf="!playGame">
+  <div *ngIf="!playGame && !gameService.loading">
     <h2>{{gameResult}}</h2>
     <h4>Computer chose {{computerChoice}}</h4>
     <h4>You chose {{playerChoice}}</h4>
@@ -39,5 +39,8 @@
 </div>
 <div *ngIf="userService.loggedUser == undefined" class="gamebox">
   <h4 style="color: red">No User Logged in. Thus no statistics will persisted.</h4>
+</div>
+<div class="centered-div" *ngIf="gameService.loading">
+  <mat-spinner></mat-spinner>
 </div>
 
