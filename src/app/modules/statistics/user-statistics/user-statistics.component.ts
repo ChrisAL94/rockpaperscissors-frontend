@@ -20,6 +20,10 @@ export class UserStatisticsComponent implements OnInit {
   ngOnInit() {
     this.userService.getUserGameHistoryByUserName(this.userService.loggedUser?.username).then((userGameHistory) => this.playerHistory = userGameHistory);
     this.userService.getAllUsersGameHistory().then((playerTable) => this.playerTable = playerTable);
+
+    if (this.playerTable) {
+      this.playerTable.sort((a, b) => a.wins - b.wins).slice(0, 9);
+    }
   }
 
 }
