@@ -57,8 +57,8 @@ export class UserService {
           }
         }));
         reject('No Connection to Backend')
+        this.loading = false;
       }, 3000)
-      this.loading = false;
     })
   }
 
@@ -78,8 +78,8 @@ export class UserService {
           UserList.push(newUser);
           resolve();
         }
+        this.loading = false;
       }, 3000)
-      this.loading = false;
     })
   }
 
