@@ -19,9 +19,9 @@
     </mat-button-toggle-group>
   </div>
   <div style="margin-top: 20px">
-    <mat-card-actions>
-      <button mat-raised-button [disabled]="playerChoice == undefined" (click)="playGame = false">Play</button>
-    </mat-card-actions>
+    <button mat-raised-button [disabled]="playerChoice == undefined"
+            (click)="playGame = false">Play
+    </button>
   </div>
   <mat-divider style="margin-top: 40px"></mat-divider>
   <div class="rulebox">
@@ -34,9 +34,7 @@
     <h2>{{gameResult}}</h2>
     <h4>Computer chose {{computerChoice}}</h4>
     <h4>You chose {{playerChoice}}</h4>
-    <mat-card-actions>
-      <button mat-raised-button (click)="playGame = true">Play Again</button>
-    </mat-card-actions>
+    <button mat-raised-button (click)="playGame = true">Play Again</button>
   </div>
 </div>
 <div *ngIf="userService.loggedUser == undefined" class="gamebox">
