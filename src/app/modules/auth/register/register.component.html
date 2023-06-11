@@ -8,15 +8,15 @@
       <p>
         <mat-form-field appearance="outline">
           <mat-label>Username</mat-label>
-          <input matInput placeholder="Username" [formControl]="username" required>
-          <mat-error *ngIf="username.invalid">{{getErrorMessage()}}</mat-error>
+          <input matInput placeholder="Username" [formControl]="usernameFormControl" required>
+          <mat-error *ngIf="usernameFormControl.invalid">{{getErrorMessage()}}</mat-error>
           <mat-icon matSuffix>person</mat-icon>
         </mat-form-field>
       </p>
       <mat-divider></mat-divider>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-button>REGISTER</button>
+      <button [routerLink]="['/game']" (click)="registerBtnClick()"  [disabled]="usernameFormControl.errors != null" mat-button>REGISTER</button>
       <button [routerLink]="['/login']" mat-button>BACK TO LOGIN</button>
     </mat-card-actions>
     <mat-card-footer>
