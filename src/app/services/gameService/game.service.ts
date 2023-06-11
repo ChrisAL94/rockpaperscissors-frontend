@@ -27,7 +27,7 @@ export class GameService {
         resolve(GameResult.Defeat);
         reject('No Connection to Backend')
         this.loading = false;
-      }, 3000)
+      }, 2000)
     });
   }
 }

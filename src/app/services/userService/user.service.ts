@@ -40,7 +40,7 @@ export class UserService {
         resolve(UserList);
         reject('No Connection to Backend')
         this.loading = false;
-      }, 3000)
+      }, 2000)
     })
   }
 
@@ -58,7 +58,7 @@ export class UserService {
         }));
         reject('No Connection to Backend')
         this.loading = false;
-      }, 3000)
+      }, 2000)
     })
   }
 
@@ -79,7 +79,7 @@ export class UserService {
           resolve();
         }
         this.loading = false;
-      }, 3000)
+      }, 2000)
     })
   }
 

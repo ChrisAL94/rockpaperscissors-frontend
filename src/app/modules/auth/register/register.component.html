@@ -1,4 +1,4 @@
-<div class="centered-div">
+<div class="centered-div" *ngIf="!userService.loading">
   <mat-card class="register-card">
     <mat-card-header>
       <mat-card-title>Register</mat-card-title>
@@ -16,10 +16,13 @@
       <mat-divider></mat-divider>
     </mat-card-content>
     <mat-card-actions>
-      <button [routerLink]="['/game']" (click)="registerBtnClick()"  [disabled]="usernameFormControl.errors != null" mat-button>REGISTER</button>
+      <button (click)="registerBtnClick()"  [disabled]="usernameFormControl.errors != null" mat-button>REGISTER</button>
       <button [routerLink]="['/login']" mat-button>BACK TO LOGIN</button>
     </mat-card-actions>
     <mat-card-footer>
     </mat-card-footer>
   </mat-card>
+</div>
+<div class="centered-div" *ngIf="userService.loading">
+  <mat-spinner></mat-spinner>
 </div>

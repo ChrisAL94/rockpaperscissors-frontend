@@ -7,8 +7,9 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { NgIf } from '@angular/common';
 import { FormControl, Validators,  ReactiveFormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { User, UserService } from '../../../services/userService/user.service';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 @Component({
@@ -16,19 +17,21 @@ import { User, UserService } from '../../../services/userService/user.service';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
   standalone: true,
-  imports: [MatCardModule, MatDividerModule, MatButtonModule, MatFormFieldModule, MatIconModule, MatInputModule, NgIf, ReactiveFormsModule, RouterLink],
+  imports: [MatCardModule, MatDividerModule, MatButtonModule, MatFormFieldModule, MatIconModule, MatInputModule, NgIf, ReactiveFormsModule, RouterLink, MatProgressSpinnerModule],
 })
 export class RegisterComponent {
   usernameFormControl = new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(20), Validators.pattern('^[a-zA-Z0-9]+$')]);
   registeredUser: User | undefined;
   userService: UserService;
+  router: Router;
 
-  constructor(userService: UserService) {
+  constructor(userService: UserService, router: Router) {
     this.userService = userService;
+    this.router = router;
   }
   registerBtnClick(): void {
     this.registeredUser = {username: this.usernameFormControl.value || '', created_at: new Date()}
-    this.userService.registerUser(this.registeredUser);
+    this.userService.registerUser(this.registeredUser).then(() => this.router.navigate(['/game'])).catch(rej => alert(rej));
   }
 
   getErrorMessage(): string {
