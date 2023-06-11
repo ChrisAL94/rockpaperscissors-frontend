@@ -25,6 +25,7 @@ let UserList: Array<User> = [user1, user2, user3];
 export class UserService {
 
   loggedUser: User | undefined;
+  loading = false;
 
 
   constructor(utils: UtilsService) {
@@ -36,24 +37,43 @@ export class UserService {
     return UserList;
   }
 
-  getAllUsersGameHistory(): Array<UserGameHistory> {
-    return UserList.map(user => {
-      return {
-        user: user,
-        wins: Math.floor(Math.random() * 100),
-        defeats: Math.floor(Math.random() * 100),
-        ties: Math.floor(Math.random() * 100)
-      }
+  async getAllUsersGameHistory(): Promise<Array<UserGameHistory>> {
+    return new Promise<Array<UserGameHistory>>((resolve, reject) => {
+      this.loading = true;
+      setTimeout(() => {
+        resolve(UserList.map(user => {
+          return {
+            user: user,
+            wins: Math.floor(Math.random() * 100),
+            defeats: Math.floor(Math.random() * 100),
+            ties: Math.floor(Math.random() * 100)
+          }
+        }));
+        reject('No Connection to Backend')
+        this.loading = false;
+      }, 3000)
     })
   }
 
-  getUserGameHistoryByUserName(username: string | undefined): UserGameHistory {
-    return this.getAllUsersGameHistory().find(userGameHistroy => userGameHistroy.user?.username == username) as UserGameHistory
+  async getUserGameHistoryByUserName(username: string | undefined): Promise<UserGameHistory> {
+    let allUserGameHistory = await this.getAllUsersGameHistory();
+    return allUserGameHistory.find(userGameHistory => userGameHistory.user?.username == username) as UserGameHistory
   }
 
-  registerUser(user: User): void {
-    this.loggedUser = user;
-    UserList.push(user);
+  async registerUser(newUser: User): Promise<void> {
+    return new Promise((resolve, reject) => {
+      this.loading = true;
+      setTimeout(() => {
+        this.loggedUser = newUser;
+        if (UserList.find(existingUser => existingUser.username == newUser.username)) {
+          reject("Username already exists. Please choose a unique username")
+        } else {
+          UserList.push(newUser);
+          resolve();
+        }
+      }, 3000)
+      this.loading = false;
+    })
   }
 
   login(user: User): void {

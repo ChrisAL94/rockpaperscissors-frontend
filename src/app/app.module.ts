@@ -21,6 +21,7 @@ import { UserStatisticsComponent } from './modules/statistics/user-statistics/us
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { UserService } from './services/userService/user.service';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 @NgModule({
@@ -53,6 +54,7 @@ import { UserService } from './services/userService/user.service';
       { path: 'game', component: PlayGameComponent },
       { path: 'statistics', component: UserStatisticsComponent },
       { path: '**', component: NotFoundComponent }]),
+    MatProgressSpinnerModule,
   ],
   providers: [UserService],
   bootstrap: [AppComponent]
