@@ -3,6 +3,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterLink } from '@angular/router';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-header',
@@ -12,4 +13,10 @@ import { RouterLink } from '@angular/router';
   imports: [MatToolbarModule, MatButtonModule, MatIconModule, RouterLink],
 })
 export class HeaderComponent {
+  userService: UserService;
+
+  constructor(userService: UserService) {
+    this.userService = userService;
+  }
+
 }

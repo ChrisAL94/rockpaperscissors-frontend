@@ -1,11 +1,13 @@
 <mat-toolbar>
-  <img class="logo header" src="assets/logo.png">
-  <span class="header">Rock Paper Scissors</span>
+  <img [routerLink]="['']" class="logo header" src="assets/logo.png">
+  <span [routerLink]="['']" class="header">Rock Paper Scissors</span>
   <span class="example-spacer"></span>
-  <button [routerLink]="['/statistics/:username']" mat-icon-button aria-label="Button to get user statistics">
+  <button [disabled]="userService.loggedUser == undefined" [routerLink]="['/statistics']" mat-icon-button
+          aria-label="Button to get user statistics">
     <mat-icon>leaderboard</mat-icon>
   </button>
-  <button [routerLink]="['/login']" mat-icon-button aria-label="Button to logout">
+  <button [disabled]="userService.loggedUser == undefined" [routerLink]="['/login']" mat-icon-button
+          aria-label="Button to logout">
     <mat-icon>logout</mat-icon>
   </button>
 </mat-toolbar>

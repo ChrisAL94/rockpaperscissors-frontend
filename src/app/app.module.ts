@@ -51,7 +51,7 @@ import { UserService } from './services/user.service';
       { path: 'login', component: LoginComponent },
       { path: 'register', component: RegisterComponent },
       { path: 'game', component: PlayGameComponent },
-      { path: 'statistics/:username', component: UserStatisticsComponent },
+      { path: 'statistics', component: UserStatisticsComponent },
       { path: '**', component: NotFoundComponent }]),
   ],
   providers: [UserService],
