@@ -10,8 +10,10 @@ export class UserStatisticsComponent {
   displayedColumns: string[] = ['username', 'wins', 'defeats', 'ties'];
   playerHistory: UserGameHistory;
   playerTable: Array<UserGameHistory>;
+  userService: UserService;
 
   constructor(userService: UserService) {
+    this.userService = userService
     this.playerHistory = userService.getUserGameHistoryByUserName(userService.loggedUser?.username);
     this.playerTable = userService.getAllUsersGameHistory();
   }

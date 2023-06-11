@@ -6,7 +6,7 @@ export interface User {
 }
 
 export interface UserGameHistory {
-  user: User,
+  user: User | undefined,
   wins: number
   defeats: number,
   ties: number,
@@ -37,15 +37,15 @@ export class UserService {
     return UserList.map(user => {
       return {
         user: user,
-        wins: Math.random() * 100,
-        defeats: Math.random() * 100,
-        ties: Math.random() * 100
+        wins: Math.floor(Math.random() * 100),
+        defeats: Math.floor(Math.random() * 100),
+        ties: Math.floor(Math.random() * 100)
       }
     })
   }
 
   getUserGameHistoryByUserName(username: string | undefined): UserGameHistory {
-    return { user: user1, wins: 5, defeats: 4, ties: 0 }
+    return this.getAllUsersGameHistory().find(userGameHistroy => userGameHistroy.user?.username == username) as UserGameHistory
   }
 
   registerUser(user: User) {
