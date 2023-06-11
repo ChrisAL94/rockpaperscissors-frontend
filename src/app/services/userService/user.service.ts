@@ -60,4 +60,9 @@ export class UserService {
     this.loggedUser = user;
     document.cookie = `loggedUser=${JSON.stringify(user)}`;
   }
+
+  logout(): void {
+    this.loggedUser = undefined
+    document.cookie = `loggedUser=; 01 Jan 1970 00:00:00 UTC`
+  }
 }

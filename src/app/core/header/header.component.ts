@@ -20,7 +20,7 @@ export class HeaderComponent {
   }
 
   logoutBtnClicked() {
-    this.userService.loggedUser = undefined;
+    this.userService.logout();
   }
 
 }
