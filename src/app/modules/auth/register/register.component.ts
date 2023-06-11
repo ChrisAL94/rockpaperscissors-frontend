@@ -8,7 +8,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { NgIf } from '@angular/common';
 import { FormControl, Validators,  ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { User, UserService } from '../../../services/user.service';
+import { User, UserService } from '../../../services/userService/user.service';
 
 
 @Component({

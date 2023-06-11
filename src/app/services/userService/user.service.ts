@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { LOGIN_COOKIE_NAME, UtilsService } from '../utils/utils.service';
 
 export interface User {
   username: string,
@@ -26,7 +27,9 @@ export class UserService {
   loggedUser: User | undefined;
 
 
-  constructor() {
+  constructor(utils: UtilsService) {
+    let loginCookieValue = utils.readCookieByName(LOGIN_COOKIE_NAME);
+    this.loggedUser = loginCookieValue ? JSON.parse(loginCookieValue) as User : undefined;
   }
 
   getAllUsers(): Array<User> {
@@ -48,8 +51,13 @@ export class UserService {
     return this.getAllUsersGameHistory().find(userGameHistroy => userGameHistroy.user?.username == username) as UserGameHistory
   }
 
-  registerUser(user: User) {
+  registerUser(user: User): void {
     this.loggedUser = user;
     UserList.push(user);
+  }
+
+  login(user: User): void {
+    this.loggedUser = user;
+    document.cookie = `loggedUser=${JSON.stringify(user)}`;
   }
 }

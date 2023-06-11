@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { UserGameHistory, UserService } from '../../../services/user.service';
+import { UserGameHistory, UserService } from '../../../services/userService/user.service';
 
 @Component({
   selector: 'app-user-statistics',

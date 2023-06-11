@@ -9,7 +9,9 @@ import { NgForOf, NgIf } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
-import { User, UserService } from '../../../services/user.service';
+import { UserService } from '../../../services/userService/user.service';
+import { GameSymbols } from '../../../services/gameService/game.service';
+import { OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-play-game',
@@ -18,14 +20,20 @@ import { User, UserService } from '../../../services/user.service';
   standalone: true,
   imports: [MatCardModule, MatDividerModule, MatButtonModule, MatFormFieldModule, MatSelectModule, FormsModule, NgForOf, RouterLink, MatIconModule, MatButtonToggleModule, NgIf],
 })
-export class PlayGameComponent {
+export class PlayGameComponent implements OnInit{
   playGame = true;
   gameResult = "You won!";
-  computerChoice= 'Rock';
+  computerChoice = GameSymbols.Rock;
+  playerChoice: GameSymbols | undefined;
 
   userService: UserService;
 
   constructor(userService: UserService) {
     this.userService = userService;
   }
+
+  ngOnInit() {
+    this.playerChoice = undefined;
+  }
+
 }

@@ -8,7 +8,7 @@ import { FormControl, FormsModule } from '@angular/forms';
 import {ThemePalette} from '@angular/material/core';
 import { NgForOf } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { User, UserService } from '../../../services/user.service';
+import { User, UserService } from '../../../services/userService/user.service';
 
 @Component({
   selector: 'app-login',
@@ -28,7 +28,7 @@ export class LoginComponent {
   }
 
   loginBtnClicked() {
-    this.userService.loggedUser = this.loggedUser;
+    this.userService.login(this.loggedUser as User);
   }
 
 }

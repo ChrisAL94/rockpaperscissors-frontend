@@ -20,7 +20,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { UserStatisticsComponent } from './modules/statistics/user-statistics/user-statistics.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { UserService } from './services/user.service';
+import { UserService } from './services/userService/user.service';
 
 
 @NgModule({

@@ -6,7 +6,7 @@
           aria-label="Button to get user statistics">
     <mat-icon>leaderboard</mat-icon>
   </button>
-  <button [disabled]="userService.loggedUser == undefined" [routerLink]="['/login']" mat-icon-button
+  <button [disabled]="userService.loggedUser == undefined" (click)="logoutBtnClicked()" [routerLink]="['/login']" mat-icon-button
           aria-label="Button to logout">
     <mat-icon>logout</mat-icon>
   </button>

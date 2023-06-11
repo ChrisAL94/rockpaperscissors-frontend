@@ -6,21 +6,21 @@
     <h5>Choose one of the symbols to play</h5>
   </div>
   <div>
-    <mat-button-toggle-group name="symbolSelector" aria-label="Symbol Selector">
-      <mat-button-toggle mat-icon-button aria-label="Rock">
+    <mat-button-toggle-group [(ngModel)]="playerChoice" name="symbolSelector" aria-label="Symbol Selector">
+      <mat-button-toggle value="Rock" mat-icon-button aria-label="Rock">
         <mat-icon>filter_hdr</mat-icon>
       </mat-button-toggle>
-      <mat-button-toggle mat-icon-button aria-label="Paper">
+      <mat-button-toggle value="Paper" mat-icon-button aria-label="Paper">
         <mat-icon>note</mat-icon>
       </mat-button-toggle>
-      <mat-button-toggle mat-icon-button aria-label="Scissors">
+      <mat-button-toggle value="Scissors" mat-icon-button aria-label="Scissors">
         <mat-icon>content_cut</mat-icon>
       </mat-button-toggle>
     </mat-button-toggle-group>
   </div>
   <div style="margin-top: 20px">
     <mat-card-actions>
-      <button mat-raised-button (click)="playGame = false">Play</button>
+      <button mat-raised-button [disabled]="playerChoice == undefined" (click)="playGame = false">Play</button>
     </mat-card-actions>
   </div>
   <mat-divider style="margin-top: 40px"></mat-divider>
@@ -33,6 +33,7 @@
   <div *ngIf="!playGame">
     <h2>{{gameResult}}</h2>
     <h4>Computer chose {{computerChoice}}</h4>
+    <h4>You chose {{playerChoice}}</h4>
     <mat-card-actions>
       <button mat-raised-button (click)="playGame = true">Play Again</button>
     </mat-card-actions>
