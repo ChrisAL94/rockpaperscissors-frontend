@@ -9,6 +9,7 @@ import { NgForOf, NgIf } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { User, UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-play-game',
@@ -21,4 +22,10 @@ export class PlayGameComponent {
   playGame = true;
   gameResult = "You won!";
   computerChoice= 'Rock';
+
+  userService: UserService;
+
+  constructor(userService: UserService) {
+    this.userService = userService;
+  }
 }

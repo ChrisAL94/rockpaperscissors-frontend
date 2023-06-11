@@ -7,13 +7,13 @@
   </div>
   <div>
     <mat-button-toggle-group name="symbolSelector" aria-label="Symbol Selector">
-      <mat-button-toggle mat-icon-button aria-label="Button to get user statistics">
+      <mat-button-toggle mat-icon-button aria-label="Rock">
         <mat-icon>filter_hdr</mat-icon>
       </mat-button-toggle>
-      <mat-button-toggle mat-icon-button aria-label="Button to logout">
+      <mat-button-toggle mat-icon-button aria-label="Paper">
         <mat-icon>note</mat-icon>
       </mat-button-toggle>
-      <mat-button-toggle mat-icon-button aria-label="Button to logout">
+      <mat-button-toggle mat-icon-button aria-label="Scissors">
         <mat-icon>content_cut</mat-icon>
       </mat-button-toggle>
     </mat-button-toggle-group>
@@ -37,5 +37,8 @@
       <button mat-raised-button (click)="playGame = true">Play Again</button>
     </mat-card-actions>
   </div>
+</div>
+<div *ngIf="userService.loggedUser == undefined" class="gamebox">
+  <h4 style="color: red">No User Logged in. Thus no statistics will persisted.</h4>
 </div>
 
