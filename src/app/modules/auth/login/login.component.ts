@@ -6,25 +6,26 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 import { FormControl, FormsModule } from '@angular/forms';
 import {ThemePalette} from '@angular/material/core';
-import { NgForOf } from '@angular/common';
+import { NgForOf, NgIf } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { User, UserService } from '../../../services/userService/user.service';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
   standalone: true,
-  imports: [MatCardModule, MatDividerModule, MatButtonModule, MatFormFieldModule, MatSelectModule, FormsModule, NgForOf, RouterLink],
+  imports: [MatCardModule, MatDividerModule, MatButtonModule, MatFormFieldModule, MatSelectModule, FormsModule, NgForOf, RouterLink, NgIf, MatProgressSpinnerModule],
 })
 export class LoginComponent {
   themeColor = new FormControl('primary' as ThemePalette);
-  usersList: Array<User>;
+  usersList: Array<User> | undefined;
   userService: UserService;
   loggedUser: User | undefined;
   constructor(userService: UserService) {
     this.userService = userService;
-    this.usersList = this.userService.getAllUsers();
+    this.userService.getAllUsers().then((userList) => {this.usersList = userList});
   }
 
   loginBtnClicked() {

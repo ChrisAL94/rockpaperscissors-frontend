@@ -33,8 +33,15 @@ export class UserService {
     this.loggedUser = loginCookieValue ? JSON.parse(loginCookieValue) as User : undefined;
   }
 
-  getAllUsers(): Array<User> {
-    return UserList;
+  async getAllUsers(): Promise<Array<User>> {
+    return new Promise<Array<User>>((resolve, reject) => {
+      this.loading = true;
+      setTimeout(() => {
+        resolve(UserList);
+        reject('No Connection to Backend')
+        this.loading = false;
+      }, 3000)
+    })
   }
 
   async getAllUsersGameHistory(): Promise<Array<UserGameHistory>> {
@@ -50,8 +57,8 @@ export class UserService {
           }
         }));
         reject('No Connection to Backend')
-        this.loading = false;
       }, 3000)
+      this.loading = false;
     })
   }
 
