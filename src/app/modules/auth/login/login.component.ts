@@ -8,6 +8,7 @@ import { FormControl, FormsModule } from '@angular/forms';
 import {ThemePalette} from '@angular/material/core';
 import { NgForOf } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { User, UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -18,5 +19,16 @@ import { RouterLink } from '@angular/router';
 })
 export class LoginComponent {
   themeColor = new FormControl('primary' as ThemePalette);
-  usersList: Array<String> = ['User_1', 'User_2', 'User_3'];
+  usersList: Array<User>;
+  userService: UserService;
+  loggedUser: User | undefined;
+  constructor(userService: UserService) {
+    this.userService = userService;
+    this.usersList = this.userService.getAllUsers();
+  }
+
+  loginBtnClicked() {
+    this.userService.loggedUser = this.loggedUser;
+  }
+
 }

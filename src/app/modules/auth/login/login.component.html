@@ -7,14 +7,14 @@
       <p>Please choose one of the existing Players or register a new one.</p>
       <mat-form-field [color]="themeColor.value!">
         <mat-label>User</mat-label>
-        <mat-select [(ngModel)]="usersList">
-          <mat-option *ngFor="let user of usersList" [value]="user">{{user}}</mat-option>
+        <mat-select [(ngModel)]="loggedUser">
+          <mat-option *ngFor="let user of usersList" [value]="user">{{user.username}}</mat-option>
         </mat-select>
       </mat-form-field>
       <mat-divider></mat-divider>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-button [routerLink]="['/game']">LOGIN</button>
+      <button mat-button (click)="loginBtnClicked()" [routerLink]="['/game']">LOGIN</button>
       <button mat-button [routerLink]="['/register']">REGISTER</button>
     </mat-card-actions>
     <mat-card-footer>

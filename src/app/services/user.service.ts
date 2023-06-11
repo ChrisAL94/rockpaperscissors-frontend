@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 
-interface User {
+export interface User {
   username: string,
   created_at: Date,
 }
 
-interface UserGameHistory {
+export interface UserGameHistory {
   user: User,
   wins: number
   defeats: number,
@@ -21,7 +21,14 @@ const user3 = { username: 'testUser3', created_at: new Date(2023, 2, 21) }
 })
 export class UserService {
 
+  loggedUser: User | undefined;
+
+
   constructor() {
+  }
+
+  getAllUsers(): Array<User> {
+    return [user1, user2, user3]
   }
 
   getAllUsersGameHistory(): Array<UserGameHistory> {
@@ -32,7 +39,7 @@ export class UserService {
     ];
   }
 
-  getUserGameHistoryByUserName(username: string): UserGameHistory {
+  getUserGameHistoryByUserName(username: string | undefined): UserGameHistory {
     return { user: user1, wins: 5, defeats: 4, ties: 0 }
   }
 }
