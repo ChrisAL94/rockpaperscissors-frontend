@@ -1,4 +1,4 @@
-<div *ngIf="!userService.loading">
+<div *ngIf="!gameHistoryService.loading">
   <h2>{{userService.loggedUser}}</h2>
   <h3>Your Statistics:</h3>
   <mat-toolbar *ngIf="playerHistory" color="primary">
@@ -52,6 +52,6 @@
     <button style="margin-top: 5%" mat-raised-button [routerLink]="['/game']">Back to Game</button>
   </mat-card-actions>
 </div>
-<div class="centered-div" *ngIf="userService.loading">
+<div class="centered-div" *ngIf="gameHistoryService.loading">
   <mat-spinner></mat-spinner>
 </div>
