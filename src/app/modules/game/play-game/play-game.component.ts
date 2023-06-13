@@ -49,7 +49,6 @@ export class PlayGameComponent implements OnInit {
     this.playGame = false;
     let gameDto: GameDto = {username: this.userService.loggedUser!, userSymbol: this.playerChoice!}
     this.gameService.play(gameDto).then(gameResult => {
-      console.log(JSON.stringify(gameResult));
       this.gameResult = gameResult.result;
       this.computerChoice = gameResult.computerSymbol
     }).catch(err => alert(err));
