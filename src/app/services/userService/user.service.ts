@@ -11,7 +11,6 @@ let UserList: Array<string> = [user1, user2, user3];
   providedIn: 'root'
 })
 export class UserService {
-
   loggedUser: string | undefined;
   loading = false;
 
@@ -22,29 +21,45 @@ export class UserService {
   }
 
   async getAllUsers(): Promise<Array<string>> {
-    return new Promise<Array<string>>((resolve, reject) => {
+    return new Promise<Array<string>>(async (resolve, reject) => {
       this.loading = true;
-      setTimeout(() => {
-        resolve(UserList);
-        reject('No Connection to Backend')
+      try {
+        let response = await fetch("http://localhost:8080/api/v1/user");
+        if (response.ok) {
+          this.loading = false;
+          response.json().then(users => {
+            resolve(users)
+          })
+        } else {
+          this.loading = false;
+          reject("fetching all users has been executed with status " + response.status)
+        }
+      } catch (err) {
         this.loading = false;
-      }, 2000)
+        reject(err)
+      }
     })
   }
 
   async registerUser(newUser: string): Promise<String> {
-    return new Promise<String>((resolve, reject) => {
+    return new Promise<String>(async (resolve, reject) => {
       this.loading = true;
-      setTimeout(() => {
-        this.loggedUser = newUser;
-        if (UserList.find(existingUser => existingUser == newUser)) {
-          reject("Username already exists. Please choose a unique username")
+      try {
+        let response = await fetch("http://localhost:8080/api/v1/user", {
+          method: "POST",
+          body: newUser
+        });
+        if (response.ok) {
+          this.loading = false;
+          resolve(newUser)
         } else {
-          UserList.push(newUser);
-          resolve(newUser);
+          this.loading = false;
+          reject(JSON.parse(await response.text()).message)
         }
+      } catch (err) {
         this.loading = false;
-      }, 2000)
+        reject(err)
+      }
     })
   }
 

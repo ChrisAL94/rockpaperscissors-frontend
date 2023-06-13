@@ -28,7 +28,7 @@ export class LoginComponent {
     this.userService = userService;
     this.userService.getAllUsers().then((userList) => {
       this.usersList = userList
-    });
+    }).catch(err => console.log(err));
   }
 
   loginBtnClicked() {
