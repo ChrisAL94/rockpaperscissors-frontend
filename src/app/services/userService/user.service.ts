@@ -50,6 +50,7 @@ export class UserService {
           body: newUser
         });
         if (response.ok) {
+          this.login(newUser);
           this.loading = false;
           resolve(newUser)
         } else {
