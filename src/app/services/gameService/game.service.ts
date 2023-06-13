@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 
 export enum GameSymbol {
-  Rock = "ROCK",
-  Paper = "PAPER",
-  Scissors = "SCISSORS"
+  ROCK = "ROCK",
+  PAPER = "PAPER",
+  SCISSORS = "SCISSORS"
 }
 
 export enum GameResult {
@@ -32,16 +32,16 @@ export class GameService {
   }
 
   async play(gameDto: GameDto) {
-    console.log(JSON.stringify(gameDto));
+    let formdata = new FormData();
+    formdata.append("username", gameDto.username);
+    formdata.append("userSymbol", gameDto.userSymbol);
     return new Promise<GameResultDto>(async (resolve, reject) => {
       this.loading = true;
       try {
         let response = await fetch("http://localhost:8080/api/v1/game", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(gameDto)
+          method: 'POST',
+          body: formdata,
+          redirect: 'follow'
         });
         if (response.ok) {
           this.loading = false;
