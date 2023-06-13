@@ -41,8 +41,8 @@ export class GameHistoryService {
   }
 
   async getUserGameHistoryByUserName(username: string | null): Promise<UserGameHistory> {
+    this.loading = true;
     return new Promise<UserGameHistory>(async (resolve, reject) => {
-      this.loading = true;
       try {
         let response = await fetch(`http://localhost:8080/api/v1/gameHistory/${username}`);
         if (response.ok) {
@@ -57,7 +57,5 @@ export class GameHistoryService {
         reject(err)
       }
     });
-    // let allUserGameHistory = await this.getAllUsersGameHistory();
-    // return allUserGameHistory.find(userGameHistory => userGameHistory.user == username) as UserGameHistory
   }
 }
