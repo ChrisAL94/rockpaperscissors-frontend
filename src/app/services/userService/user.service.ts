@@ -18,14 +18,16 @@ export class UserService {
 
 
   constructor(utils: UtilsService) {
-    this.utils = utils
+    this.utils = utils;
     let loginCookieValue = this.utils.readCookieByName(LOGIN_COOKIE_NAME);
     this.loggedUser = loginCookieValue ? JSON.parse(loginCookieValue) as string : undefined;
   }
 
   async getAllUsers(): Promise<Array<string>> {
     this.loading = true;
-    return await this.utils.fetchData<Array<string>>(this.path).finally(() => {this.loading = false});
+    return await this.utils.fetchData<Array<string>>(this.path).finally(() => {
+      this.loading = false
+    });
   }
 
   async registerUser(newUser: string): Promise<string> {
