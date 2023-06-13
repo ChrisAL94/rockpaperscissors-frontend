@@ -18,7 +18,7 @@ export class UserStatisticsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userService.getUserGameHistoryByUserName(this.userService.loggedUser?.username).then((userGameHistory) => this.playerHistory = userGameHistory);
+    this.userService.getUserGameHistoryByUserName(this.userService.loggedUser!).then((userGameHistory) => this.playerHistory = userGameHistory);
     this.userService.getAllUsersGameHistory().then((playerTable) => this.playerTable = playerTable);
 
     if (this.playerTable) {

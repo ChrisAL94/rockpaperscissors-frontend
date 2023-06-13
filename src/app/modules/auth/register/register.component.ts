@@ -1,15 +1,15 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatCardModule} from '@angular/material/card';
 import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import { NgIf } from '@angular/common';
-import { FormControl, Validators,  ReactiveFormsModule } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
-import { User, UserService } from '../../../services/userService/user.service';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import {NgIf} from '@angular/common';
+import {FormControl, Validators, ReactiveFormsModule} from '@angular/forms';
+import {Router, RouterLink} from '@angular/router';
+import {UserService} from '../../../services/userService/user.service';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
 @Component({
@@ -21,7 +21,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 })
 export class RegisterComponent {
   usernameFormControl = new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(20), Validators.pattern('^[a-zA-Z0-9]+$')]);
-  registeredUser: User | undefined;
+  registeredUser: string | undefined;
   userService: UserService;
   router: Router;
 
@@ -29,8 +29,9 @@ export class RegisterComponent {
     this.userService = userService;
     this.router = router;
   }
+
   registerBtnClick(): void {
-    this.registeredUser = {username: this.usernameFormControl.value || '', created_at: new Date()}
+    this.registeredUser = this.usernameFormControl.value!
     this.userService.registerUser(this.registeredUser).then(() => this.router.navigate(['/game'])).catch(rej => alert(rej));
   }
 

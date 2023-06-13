@@ -1,15 +1,15 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatCardModule} from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
-import { FormControl, FormsModule } from '@angular/forms';
+import {FormControl, FormsModule} from '@angular/forms';
 import {ThemePalette} from '@angular/material/core';
-import { NgForOf, NgIf } from '@angular/common';
-import { RouterLink } from '@angular/router';
-import { User, UserService } from '../../../services/userService/user.service';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import {NgForOf, NgIf} from '@angular/common';
+import {RouterLink} from '@angular/router';
+import {UserService} from '../../../services/userService/user.service';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-login',
@@ -20,16 +20,21 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 })
 export class LoginComponent {
   themeColor = new FormControl('primary' as ThemePalette);
-  usersList: Array<User> | undefined;
+  usersList: Array<string> | undefined;
   userService: UserService;
-  loggedUser: User | undefined;
+  loggedUser: string | undefined;
+
   constructor(userService: UserService) {
     this.userService = userService;
-    this.userService.getAllUsers().then((userList) => {this.usersList = userList});
+    this.userService.getAllUsers().then((userList) => {
+      this.usersList = userList
+    });
   }
 
   loginBtnClicked() {
-    this.userService.login(this.loggedUser as User);
+    if (this.loggedUser != undefined) {
+      this.userService.login(this.loggedUser);
+    }
   }
 
 }

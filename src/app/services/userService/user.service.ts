@@ -1,40 +1,35 @@
-import { Injectable } from '@angular/core';
-import { LOGIN_COOKIE_NAME, UtilsService } from '../utils/utils.service';
-
-export interface User {
-  username: string,
-  created_at: Date,
-}
+import {Injectable} from '@angular/core';
+import {LOGIN_COOKIE_NAME, UtilsService} from '../utils/utils.service';
 
 export interface UserGameHistory {
-  user: User | undefined,
+  username: string,
   wins: number
   defeats: number,
   ties: number,
 }
 
-const user1 = { username: 'testUser1', created_at: new Date(2023, 5, 21) }
-const user2 = { username: 'testUser2', created_at: new Date(2023, 4, 21) }
-const user3 = { username: 'testUser3', created_at: new Date(2023, 2, 21) }
+const user1 = 'testUser1'
+const user2 = 'testUser2'
+const user3 = 'testUser3'
 
-let UserList: Array<User> = [user1, user2, user3];
+let UserList: Array<string> = [user1, user2, user3];
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  loggedUser: User | undefined;
+  loggedUser: string | undefined;
   loading = false;
 
 
   constructor(utils: UtilsService) {
     let loginCookieValue = utils.readCookieByName(LOGIN_COOKIE_NAME);
-    this.loggedUser = loginCookieValue ? JSON.parse(loginCookieValue) as User : undefined;
+    this.loggedUser = loginCookieValue ? JSON.parse(loginCookieValue) as string : undefined;
   }
 
-  async getAllUsers(): Promise<Array<User>> {
-    return new Promise<Array<User>>((resolve, reject) => {
+  async getAllUsers(): Promise<Array<string>> {
+    return new Promise<Array<string>>((resolve, reject) => {
       this.loading = true;
       setTimeout(() => {
         resolve(UserList);
@@ -50,7 +45,7 @@ export class UserService {
       setTimeout(() => {
         resolve(UserList.map(user => {
           return {
-            user: user,
+            username: user,
             wins: Math.floor(Math.random() * 100),
             defeats: Math.floor(Math.random() * 100),
             ties: Math.floor(Math.random() * 100)
@@ -62,28 +57,28 @@ export class UserService {
     })
   }
 
-  async getUserGameHistoryByUserName(username: string | undefined): Promise<UserGameHistory> {
+  async getUserGameHistoryByUserName(username: string | null): Promise<UserGameHistory> {
     let allUserGameHistory = await this.getAllUsersGameHistory();
-    return allUserGameHistory.find(userGameHistory => userGameHistory.user?.username == username) as UserGameHistory
+    return allUserGameHistory.find(userGameHistory => userGameHistory.username == username) as UserGameHistory
   }
 
-  async registerUser(newUser: User): Promise<void> {
-    return new Promise((resolve, reject) => {
+  async registerUser(newUser: string): Promise<String> {
+    return new Promise<String>((resolve, reject) => {
       this.loading = true;
       setTimeout(() => {
         this.loggedUser = newUser;
-        if (UserList.find(existingUser => existingUser.username == newUser.username)) {
+        if (UserList.find(existingUser => existingUser == newUser)) {
           reject("Username already exists. Please choose a unique username")
         } else {
           UserList.push(newUser);
-          resolve();
+          resolve(newUser);
         }
         this.loading = false;
       }, 2000)
     })
   }
 
-  login(user: User): void {
+  login(user: string): void {
     this.loggedUser = user;
     document.cookie = `loggedUser=${JSON.stringify(user)}`;
   }
