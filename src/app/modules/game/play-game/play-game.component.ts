@@ -1,18 +1,18 @@
-import { Component } from '@angular/core';
-import { MatCardModule } from '@angular/material/card';
-import { MatDividerModule } from '@angular/material/divider';
-import { MatButtonModule } from '@angular/material/button';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatSelectModule } from '@angular/material/select';
-import { FormsModule } from '@angular/forms';
-import { NgForOf, NgIf } from '@angular/common';
-import { RouterLink } from '@angular/router';
-import { MatIconModule } from '@angular/material/icon';
-import { MatButtonToggleModule } from '@angular/material/button-toggle';
-import { UserService } from '../../../services/userService/user.service';
-import { GameService, GameSymbols } from '../../../services/gameService/game.service';
-import { OnInit } from '@angular/core';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import {Component} from '@angular/core';
+import {MatCardModule} from '@angular/material/card';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatButtonModule} from '@angular/material/button';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatSelectModule} from '@angular/material/select';
+import {FormsModule} from '@angular/forms';
+import {NgForOf, NgIf} from '@angular/common';
+import {RouterLink} from '@angular/router';
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import {UserService} from '../../../services/userService/user.service';
+import {GameDto, GameResult, GameResultDto, GameService, GameSymbol} from '../../../services/gameService/game.service';
+import {OnInit} from '@angular/core';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-play-game',
@@ -21,11 +21,11 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
   standalone: true,
   imports: [MatCardModule, MatDividerModule, MatButtonModule, MatFormFieldModule, MatSelectModule, FormsModule, NgForOf, RouterLink, MatIconModule, MatButtonToggleModule, NgIf, MatProgressSpinnerModule],
 })
-export class PlayGameComponent implements OnInit{
+export class PlayGameComponent implements OnInit {
   playGame = true;
-  gameResult = "You won!";
-  computerChoice = GameSymbols.Rock;
-  playerChoice: GameSymbols | undefined;
+  gameResult: GameResult | undefined;
+  computerChoice: GameSymbol | undefined;
+  playerChoice: GameSymbol | undefined;
   userService: UserService;
   gameService: GameService;
 
@@ -38,9 +38,21 @@ export class PlayGameComponent implements OnInit{
     this.playerChoice = undefined;
   }
 
+  resetGame() {
+    this.playGame = true;
+    this.gameResult = undefined;
+    this.computerChoice = undefined;
+    this.playerChoice =  undefined
+  }
+
   async play() {
     this.playGame = false;
-    this.gameResult = await this.gameService.play(this.playerChoice);
+    let gameDto: GameDto = {username: this.userService.loggedUser!, userSymbol: this.playerChoice!}
+    this.gameService.play(gameDto).then(gameResult => {
+      console.log(JSON.stringify(gameResult));
+      this.gameResult = gameResult.result;
+      this.computerChoice = gameResult.computerSymbol
+    }).catch(err => alert(err));
   }
 
 }

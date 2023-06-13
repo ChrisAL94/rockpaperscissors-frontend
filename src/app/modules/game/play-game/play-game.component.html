@@ -34,7 +34,7 @@
     <h2>{{gameResult}}</h2>
     <h4>Computer chose {{computerChoice}}</h4>
     <h4>You chose {{playerChoice}}</h4>
-    <button mat-raised-button (click)="playGame = true">Play Again</button>
+    <button mat-raised-button (click)="resetGame()">Play Again</button>
   </div>
 </div>
 <div *ngIf="userService.loggedUser == undefined" class="gamebox">
