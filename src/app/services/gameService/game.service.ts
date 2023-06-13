@@ -54,12 +54,6 @@ export class GameService {
         this.loading = false;
         reject(err)
       }
-      // this.loading = true;
-      // setTimeout(() => {
-      //   resolve(GameResult.Defeat);
-      //   reject('No Connection to Backend')
-      //   this.loading = false;
-      // }, 2000)
     });
   }
 }

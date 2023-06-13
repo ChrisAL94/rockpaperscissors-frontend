@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 export interface UserGameHistory {
-  username: string,
+  user: string,
   wins: number
   defeats: number,
   ties: number,
@@ -22,25 +22,26 @@ export class GameHistoryService {
   constructor() { }
 
   async getAllUsersGameHistory(): Promise<Array<UserGameHistory>> {
-    return new Promise<Array<UserGameHistory>>((resolve, reject) => {
+    return new Promise<Array<UserGameHistory>>(async (resolve, reject) => {
       this.loading = true;
-      setTimeout(() => {
-        resolve(UserList.map(user => {
-          return {
-            username: user,
-            wins: Math.floor(Math.random() * 100),
-            defeats: Math.floor(Math.random() * 100),
-            ties: Math.floor(Math.random() * 100)
-          }
-        }));
-        reject('No Connection to Backend')
+      try {
+        let response = await fetch("http://localhost:8080/api/v1/gameHistory");
+        if (response.ok) {
+          this.loading = false;
+          response.json().then(resolve).catch(resolve);
+        } else {
+          this.loading = false;
+          reject(JSON.parse(await response.text()).message)
+        }
+      } catch (err) {
         this.loading = false;
-      }, 2000)
-    })
+        reject(err)
+      }
+    });
   }
 
   async getUserGameHistoryByUserName(username: string | null): Promise<UserGameHistory> {
     let allUserGameHistory = await this.getAllUsersGameHistory();
-    return allUserGameHistory.find(userGameHistory => userGameHistory.username == username) as UserGameHistory
+    return allUserGameHistory.find(userGameHistory => userGameHistory.user == username) as UserGameHistory
   }
 }
