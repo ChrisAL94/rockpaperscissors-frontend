@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
+import {UtilsService} from "../utils/utils.service";
 
 export interface UserGameHistory {
   user: string,
@@ -18,44 +19,24 @@ let UserList: Array<string> = [user1, user2, user3];
 })
 export class GameHistoryService {
   loading = false;
+  path = "/gameHistory"
+  utils: UtilsService;
 
-  constructor() { }
+  constructor(utils: UtilsService) {
+    this.utils = utils;
+  }
 
   async getAllUsersGameHistory(): Promise<Array<UserGameHistory>> {
-    return new Promise<Array<UserGameHistory>>(async (resolve, reject) => {
-      this.loading = true;
-      try {
-        let response = await fetch("http://localhost:8080/api/v1/gameHistory");
-        if (response.ok) {
-          this.loading = false;
-          response.json().then(resolve).catch(resolve);
-        } else {
-          this.loading = false;
-          reject(JSON.parse(await response.text()).message)
-        }
-      } catch (err) {
-        this.loading = false;
-        reject(err)
-      }
-    });
+    this.loading = true;
+    return await this.utils.fetchData<Array<UserGameHistory>>(this.path).finally(() => {
+      this.loading = false;
+    })
   }
 
   async getUserGameHistoryByUserName(username: string | null): Promise<UserGameHistory> {
     this.loading = true;
-    return new Promise<UserGameHistory>(async (resolve, reject) => {
-      try {
-        let response = await fetch(`http://localhost:8080/api/v1/gameHistory/${username}`);
-        if (response.ok) {
-          this.loading = false;
-          response.json().then(resolve).catch(resolve);
-        } else {
-          this.loading = false;
-          reject(JSON.parse(await response.text()).message)
-        }
-      } catch (err) {
-        this.loading = false;
-        reject(err)
-      }
-    });
+    return await this.utils.fetchData<UserGameHistory>(`${this.path}/${username}`).finally(() => {
+      this.loading = false
+    })
   }
 }
