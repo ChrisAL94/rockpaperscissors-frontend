@@ -1,5 +1,6 @@
 # RockpaperscissorsFrontend
 
+TThis is the frontend of a Rock-Paper-Scissors game application built with Angular. Here you can find the [backend code](https://github.com/ChrisAL94/rockpaperscissors-backend).
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.0.5.
 
 ## Development server
